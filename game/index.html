@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>海洋钓鱼</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#061F3A;touch-action:none;user-select:none;font-family:system-ui,-apple-system,sans-serif}
+canvas{display:block}
+
+/* Top bar */
+.top-bar{position:fixed;top:10px;left:10px;display:flex;gap:6px;z-index:10;flex-wrap:wrap;max-width:calc(100% - 20px)}
+.top-btn{padding:7px 14px;border-radius:8px;border:2px solid rgba(255,255,255,.4);color:#fff;font:bold 13px sans-serif;cursor:pointer;backdrop-filter:blur(4px);touch-action:manipulation;pointer-events:auto}
+.top-btn:active{transform:scale(.95)}
+#shopBtn{background:rgba(180,120,40,.75)}
+#bagBtn{background:rgba(80,140,60,.75)}
+#profileBtn{background:rgba(100,80,160,.75)}
+#dexBtn{background:rgba(40,120,180,.75)}
+
+/* Discovery flash banner */
+#dexFlash{position:fixed;top:90px;left:50%;transform:translateX(-50%) translateY(-40px);z-index:50;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;padding:10px 18px;border-radius:14px;font-weight:bold;font-size:14px;box-shadow:0 6px 24px rgba(255,215,0,.4),0 0 40px rgba(255,215,0,.3);opacity:0;transition:all .35s cubic-bezier(.2,.9,.3,1.4);pointer-events:none;text-align:center;min-width:220px}
+#dexFlash.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#dexFlash .dex-label{font-size:11px;color:rgba(26,26,46,.7);letter-spacing:1px;margin-bottom:2px}
+#dexFlash .dex-name{font-size:18px;margin-bottom:3px}
+#dexFlash .dex-desc{font-size:11px;font-weight:normal;color:rgba(26,26,46,.85)}
+#dexFlash .dex-flash-img{display:block;margin:0 auto 4px;width:56px;height:42px;object-fit:contain}
+
+/* Dex panel */
+.dex-header-info{padding:8px 14px;background:rgba(74,230,138,.1);font-size:13px;color:#4AE68A;text-align:center}
+.dex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.dex-card{background:rgba(255,255,255,.07);border-radius:10px;padding:8px 6px;text-align:center;border:2px solid transparent;cursor:pointer;transition:all .15s}
+.dex-card.discovered{border-color:rgba(74,230,138,.3)}
+.dex-card:active{transform:scale(.95)}
+.dex-card canvas{display:block;margin:0 auto 4px;width:72px;height:54px}
+.dex-card .dex-thumb-img{display:block;margin:0 auto 4px;width:72px;height:54px;object-fit:contain}
+.dex-card .dex-tier{font-size:10px;color:#FFD700;margin-bottom:2px}
+.dex-card .dex-fish-name{font-size:11px;font-weight:bold;line-height:1.2;min-height:26px}
+.dex-card.unknown .dex-fish-name{color:rgba(255,255,255,.3)}
+.dex-card.unknown canvas{filter:brightness(0) invert(.3)}
+.dex-tier-section{grid-column:1/-1;padding:6px 4px 4px;color:#FFD700;font-size:12px;font-weight:bold;letter-spacing:1px}
+.dex-detail{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:110;display:none;justify-content:center;align-items:center;padding:20px}
+.dex-detail.show{display:flex}
+.dex-detail-box{background:#1a2a3a;border-radius:16px;padding:20px;max-width:360px;width:100%;text-align:center;color:#fff}
+.dex-detail-box canvas{display:block;margin:0 auto 12px;width:220px;height:170px;background:rgba(74,138,180,.15);border-radius:10px}
+.dex-detail-img{display:block;margin:0 auto 12px;width:220px;height:170px;object-fit:contain;background:rgba(74,138,180,.15);border-radius:10px}
+.dex-detail-silhouette{filter:brightness(0) invert(.3)}
+.dex-detail-name{font-size:20px;font-weight:bold;margin-bottom:4px}
+.dex-detail-tier{font-size:13px;color:#FFD700;margin-bottom:10px}
+.dex-detail-desc{font-size:13px;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:16px}
+.dex-detail-stats{display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid rgba(255,255,255,.1);margin-bottom:14px}
+.dex-detail-stat{font-size:11px;color:rgba(255,255,255,.5)}
+.dex-detail-stat strong{display:block;color:#4AE68A;font-size:14px;margin-bottom:2px}
+.dex-detail-close{background:#4A90D9;color:#fff;border:none;padding:8px 22px;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer}
+
+/* HUD */
+#ui{position:fixed;top:10px;right:12px;color:#fff;font:bold 15px sans-serif;text-shadow:1px 1px 3px rgba(0,0,0,.6);text-align:right;pointer-events:none;z-index:10}
+#oceanHud{position:fixed;top:40px;right:12px;color:#4AE68A;font:bold 13px sans-serif;text-shadow:1px 1px 2px rgba(0,0,0,.6);text-align:right;pointer-events:none;z-index:10;display:none}
+
+/* Action buttons */
+.btn{position:fixed;width:70px;height:70px;border-radius:50%;border:3px solid rgba(255,255,255,.6);color:#fff;font:bold 14px sans-serif;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.btn:active{transform:scale(.92)}
+#fishBtn{bottom:22px;right:22px;background:rgba(0,120,200,.7)}
+#fishBtn.disabled{opacity:.4;pointer-events:none}
+#modeBtn{bottom:22px;right:104px;background:rgba(40,160,80,.7)}
+#pkBtn{bottom:22px;left:22px;background:rgba(200,50,60,.7);right:auto}
+
+/* Struggle QTE */
+#struggleBtn{position:fixed;left:50%;bottom:140px;transform:translateX(-50%);width:140px;height:140px;border-radius:50%;border:5px solid #fff;background:radial-gradient(circle at 35% 35%,#FF6B6B,#D32F2F);color:#fff;font:bold 28px sans-serif;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:30;box-shadow:0 0 24px rgba(255,70,70,.7),0 6px 20px rgba(0,0,0,.4);animation:struggle-pulse .4s ease-in-out infinite alternate;touch-action:manipulation;user-select:none}
+#struggleBtn:active{transform:translateX(-50%) scale(.92)}
+@keyframes struggle-pulse{from{box-shadow:0 0 24px rgba(255,70,70,.6),0 6px 20px rgba(0,0,0,.4)}to{box-shadow:0 0 40px rgba(255,180,50,.9),0 6px 20px rgba(0,0,0,.4)}}
+#struggleBar{position:fixed;left:50%;bottom:310px;transform:translateX(-50%);width:220px;height:22px;background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.7);border-radius:12px;display:none;overflow:hidden;z-index:30}
+#struggleBar .struggle-fill{height:100%;background:linear-gradient(90deg,#FFD93D,#FF6B35);width:0;transition:width .08s}
+#struggleBar .struggle-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font:bold 12px sans-serif;text-shadow:1px 1px 2px rgba(0,0,0,.7)}
+
+/* Popup */
+#catchPopup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);color:#FFD700;font:bold 26px sans-serif;text-shadow:0 0 12px rgba(255,215,0,.8);pointer-events:none;z-index:20;transition:transform .3s,opacity .5s;opacity:1}
+#catchPopup.show{transform:translate(-50%,-50%) scale(1)}
+#catchPopup.hide{opacity:0;transform:translate(-50%,-80%) scale(1.2)}
+
+/* Overlay panels */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;justify-content:center;align-items:center}
+.panel{background:#1a2a3a;border-radius:16px;width:92%;max-width:420px;max-height:82vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.5);color:#fff;font-size:14px}
+.panel-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.1)}
+.panel-header h2{font-size:17px;margin:0}
+.panel-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:4px 8px}
+.panel-body{flex:1;overflow-y:auto;padding:12px}
+
+/* Shop */
+.shop-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.1)}
+.shop-tab{flex:1;padding:10px 0;text-align:center;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5);border-bottom:2px solid transparent;transition:all .2s}
+.shop-tab.active{color:#FFD700;border-bottom-color:#FFD700}
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.shop-card{background:rgba(255,255,255,.07);border-radius:10px;padding:12px;text-align:center;border:2px solid transparent}
+.shop-card.equipped{border-color:#FFD700}
+.shop-card .icon{font-size:26px;margin-bottom:4px}
+.shop-card .name{font-weight:bold;font-size:13px;margin-bottom:2px}
+.shop-card .desc{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;min-height:24px}
+.shop-card .price{font-size:12px;color:#FFD700;margin-bottom:6px}
+.shop-card button{width:100%;padding:5px;border:none;border-radius:6px;font-size:12px;font-weight:bold;cursor:pointer}
+.buy-btn{background:#4A90D9;color:#fff}
+.buy-btn:disabled{background:#555;color:#888;cursor:default}
+.equip-btn{background:#40A060;color:#fff}
+.equipped-btn{background:rgba(255,215,0,.2);color:#FFD700;cursor:default}
+.upload-btn{background:#9060C0;color:#fff;margin-top:4px;padding:5px;border:none;border-radius:6px;font-size:12px;cursor:pointer;width:100%}
+.shop-footer{padding:10px 16px;border-top:1px solid rgba(255,255,255,.1);text-align:center;font-size:14px;color:#FFD700}
+.avatar-preview{width:36px;height:36px;border-radius:50%;object-fit:cover;margin:4px auto;display:block;border:2px solid rgba(255,255,255,.3)}
+
+/* Backpack */
+.bag-cat{font:bold 13px sans-serif;color:#FFD700;padding:8px 0 4px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:4px}
+.bag-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,.05);margin-bottom:4px;cursor:pointer}
+.bag-item.equipped{border:1px solid #FFD700;background:rgba(255,215,0,.08)}
+.bag-item .icon{font-size:20px}
+.bag-item .name{flex:1;font-size:13px}
+.eq-tag{font-size:11px;color:#FFD700}
+.eq-btn{font-size:11px;color:#4A90D9}
+
+/* Profile */
+.prof-avatar{text-align:center;padding:16px 0 10px}
+.prof-img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.3);display:block;margin:0 auto 8px}
+.prof-img-placeholder{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 8px}
+.prof-field{padding:0 16px 12px}
+.prof-field label{font-size:12px;color:rgba(255,255,255,.5);display:block;margin-bottom:4px}
+.prof-field input{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:14px}
+.prof-stats{display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.stat{text-align:center}
+.stat-val{display:block;font:bold 18px sans-serif;color:#FFD700}
+.stat-label{font-size:11px;color:rgba(255,255,255,.5)}
+.prof-equip{padding:12px 16px}
+.prof-equip-title{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px}
+.prof-equip-list{display:flex;flex-wrap:wrap;gap:8px}
+.prof-eq-item{background:rgba(255,255,255,.07);padding:4px 10px;border-radius:6px;font-size:12px}
+
+/* Death panel */
+#deathPanel{display:none;position:fixed;inset:0;background:rgba(180,20,20,.5);z-index:200;justify-content:center;align-items:center}
+.death-box{background:#1a1a2e;border-radius:16px;padding:30px 24px;text-align:center;max-width:320px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.6)}
+.death-box h2{color:#FF4757;font-size:22px;margin-bottom:8px}
+#deathMsg{color:#fff;font-size:15px;margin-bottom:6px}
+#deathStats{color:rgba(255,255,255,.6);font-size:13px;margin-bottom:20px}
+.death-btns{display:flex;gap:10px;justify-content:center}
+.death-btns button{padding:10px 20px;border:none;border-radius:10px;font:bold 14px sans-serif;cursor:pointer}
+#restartBtn{background:#4A90D9;color:#fff}
+#reviveBtn{background:#FFD700;color:#1a1a2e}
+#reviveBtn:disabled{background:#555;color:#888;cursor:default}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="ui"><div id="score">积分: 0</div><div id="count">钓鱼: 0条</div></div>
+<div id="oceanHud"></div>
+
+<div class="top-bar">
+  <button class="top-btn" id="shopBtn">商店</button>
+  <button class="top-btn" id="bagBtn">背包</button>
+  <button class="top-btn" id="dexBtn">图鉴</button>
+  <button class="top-btn" id="profileBtn">我的</button>
+</div>
+
+<button class="btn" id="fishBtn">抛竿</button>
+<button class="btn" id="modeBtn">下海</button>
+<button class="btn" id="pkBtn">PK</button>
+<div id="catchPopup"></div>
+<div id="dexFlash"></div>
+
+<!-- Struggle QTE -->
+<button id="struggleBtn">拉!</button>
+<div id="struggleBar"><div class="struggle-fill"></div><div class="struggle-label">0 / 0</div></div>
+
+<!-- Ocean Choice Panel -->
+<div id="oceanChoicePanel" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;justify-content:center;align-items:center">
+  <div style="background:#1A1A2E;border-radius:12px;padding:24px 32px;text-align:center;color:#fff;max-width:300px">
+    <div style="font-size:18px;font-weight:bold;margin-bottom:16px">下海模式</div>
+    <div style="font-size:14px;color:#aaa;margin-bottom:20px">检测到上次的进度</div>
+    <button id="oceanResumeBtn" style="display:block;width:100%;padding:12px;margin-bottom:10px;background:#4AE68A;color:#000;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer">继续上次</button>
+    <button id="oceanRestartBtn" style="display:block;width:100%;padding:12px;background:transparent;color:#FF4757;border:1px solid #FF4757;border-radius:8px;font-size:16px;cursor:pointer">重新开始</button>
+  </div>
+</div>
+
+<!-- Shop -->
+<div class="overlay" id="shopOverlay">
+  <div class="panel">
+    <div class="panel-header"><h2>商店</h2><button class="panel-close">&times;</button></div>
+    <div class="shop-tabs">
+      <div class="shop-tab active" data-tab="rod">鱼竿</div>
+      <div class="shop-tab" data-tab="bait">鱼食</div>
+      <div class="shop-tab" data-tab="hook">鱼钩</div>
+      <div class="shop-tab" data-tab="char">角色</div>
+    </div>
+    <div class="panel-body"><div class="shop-grid" id="shopGrid"></div></div>
+    <div class="shop-footer" id="shopFooter">积分: 0</div>
+  </div>
+</div>
+
+<!-- Backpack -->
+<div class="overlay" id="bagOverlay">
+  <div class="panel">
+    <div class="panel-header"><h2>背包</h2><button class="panel-close">&times;</button></div>
+    <div class="panel-body" id="bagGrid"></div>
+  </div>
+</div>
+
+<!-- Profile -->
+<div class="overlay" id="profileOverlay">
+  <div class="panel">
+    <div class="panel-header"><h2>个人中心</h2><button class="panel-close">&times;</button></div>
+    <div class="panel-body" id="profileContent"></div>
+  </div>
+</div>
+
+<!-- Dex -->
+<div class="overlay" id="dexOverlay">
+  <div class="panel">
+    <div class="panel-header"><h2>海洋图鉴</h2><button class="panel-close">&times;</button></div>
+    <div class="dex-header-info" id="dexHeaderInfo"></div>
+    <div class="panel-body"><div class="dex-grid" id="dexGrid"></div></div>
+  </div>
+</div>
+
+<!-- Dex detail -->
+<div class="dex-detail" id="dexDetail">
+  <div class="dex-detail-box">
+    <div id="dexDetailVisual"></div>
+    <div class="dex-detail-name" id="dexDetailName"></div>
+    <div class="dex-detail-tier" id="dexDetailTier"></div>
+    <div class="dex-detail-desc" id="dexDetailDesc"></div>
+    <div class="dex-detail-stats" id="dexDetailStats"></div>
+    <button class="dex-detail-close" id="dexDetailClose">关闭</button>
+  </div>
+</div>
+
+<!-- Death -->
+<div id="deathPanel">
+  <div class="death-box">
+    <h2>游戏结束</h2>
+    <div id="deathMsg"></div>
+    <div id="deathStats"></div>
+    <div class="death-btns">
+      <button id="restartBtn">重新开始</button>
+      <button id="reviveBtn">复活 (-10积分)</button>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="avatarInput" accept="image/*" style="display:none">
+
+<script src="js/config.js" onerror="document.title='config加载失败'"></script>
+<script src="js/game.js" onerror="document.title='game加载失败'"></script>
+<script src="js/fish-render.js" onerror="document.title='fish-render加载失败'"></script>
+<script src="js/fish-shapes.js" onerror="document.title='fish-shapes加载失败'"></script>
+<script src="js/render.js" onerror="document.title='render加载失败'"></script>
+<script src="js/adventure.js" onerror="document.title='adventure加载失败'"></script>
+<script src="js/ui.js" onerror="document.title='ui加载失败'"></script>
+<script>
+try{ G.initUI(); G.init(); }catch(e){ console.error('Init error:',e); alert('游戏初始化失败: '+e.message); }
+</script>
+</body>
+</html>
