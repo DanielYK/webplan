@@ -38,6 +38,9 @@
         .badge { display: inline-block; background: #3498db; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; margin-right: 5px; }
         .badge-green { background: #28a745; }
         .badge-orange { background: #fd7e14; }
+        .route-map { margin: 16px 0 20px; border: 1px solid #cfe0ef; border-radius: 8px; overflow: hidden; background: #f5fbff; }
+        .route-map svg { display: block; width: 100%; height: auto; }
+        .map-note { color: #52616f; font-size: 0.9em; margin-top: -6px; }
         @media (max-width: 768px) { .container { padding: 10px; } table { font-size: 0.8em; } th, td { padding: 5px 8px; } }
 
         .switch-shell { position: sticky; top: 0; z-index: 300; background: #f8fafe; border-bottom: 1px solid #d8e7f5; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
@@ -232,6 +235,45 @@
 <section id="family-schedule" class="section-card">
 <h2>三、行程安排（亲子友好节奏）</h2>
 <p><strong>设计原则</strong>：每天都有海边时间，穿插海洋馆、赶海、玩沙等体验；每天只安排一个强项目。</p>
+
+<h3>6天动线地图</h3>
+<div class="route-map">
+<svg viewBox="0 0 860 440" role="img" aria-labelledby="route-title-family">
+<title id="route-title-family">6天青岛旅行动线地图</title>
+<defs>
+<marker id="route-arrow-family" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+<path d="M0,0 L0,6 L9,3 z" fill="#1a5276"></path>
+</marker>
+</defs>
+<rect width="860" height="440" fill="#f5fbff"></rect>
+<path d="M470 0 C540 70 515 140 610 205 C705 270 760 340 860 440 L860 0 Z" fill="#dff4ff"></path>
+<path d="M0 0 H520 C440 90 420 150 465 215 C520 295 420 375 300 440 H0 Z" fill="#eef8ef"></path>
+<path d="M140 92 L205 238 C330 182 455 170 570 214 C500 285 385 335 250 350" fill="none" stroke="#1a5276" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#route-arrow-family)"></path>
+<path d="M250 350 C190 285 110 210 140 92" fill="none" stroke="#7f8c8d" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#route-arrow-family)"></path>
+<circle cx="140" cy="92" r="13" fill="#34495e"></circle>
+<circle cx="205" cy="238" r="15" fill="#2e86c1"></circle>
+<circle cx="570" cy="214" r="15" fill="#27ae60"></circle>
+<circle cx="250" cy="350" r="15" fill="#f39c12"></circle>
+<rect x="40" y="42" width="230" height="62" rx="8" fill="white" stroke="#cfe0ef"></rect>
+<text x="58" y="68" fill="#1a5276" font-size="18" font-weight="700">青岛北站</text>
+<text x="58" y="91" fill="#52616f" font-size="14">Day 1到达 / Day 6返程</text>
+<rect x="188" y="178" width="250" height="80" rx="8" fill="white" stroke="#cfe0ef"></rect>
+<text x="206" y="204" fill="#1a5276" font-size="18" font-weight="700">市南老城海边</text>
+<text x="206" y="228" fill="#52616f" font-size="14">Day 1-2：鲁迅公园、栈桥</text>
+<text x="206" y="248" fill="#52616f" font-size="14">海底世界、第二浴场、八大关</text>
+<rect x="575" y="154" width="245" height="78" rx="8" fill="white" stroke="#cfe0ef"></rect>
+<text x="593" y="180" fill="#1a5276" font-size="18" font-weight="700">崂山石老人海边</text>
+<text x="593" y="204" fill="#52616f" font-size="14">Day 3-4：极地海洋世界</text>
+<text x="593" y="224" fill="#52616f" font-size="14">石老人沙滩、小麦岛</text>
+<rect x="268" y="338" width="255" height="68" rx="8" fill="white" stroke="#cfe0ef"></rect>
+<text x="286" y="364" fill="#1a5276" font-size="18" font-weight="700">黄岛金沙滩</text>
+<text x="286" y="388" fill="#52616f" font-size="14">Day 5-6：整天玩沙、日落、返程</text>
+<text x="330" y="116" fill="#1a5276" font-size="14" font-weight="700">Day 3换住</text>
+<text x="430" y="315" fill="#1a5276" font-size="14" font-weight="700">Day 5跨海到西海岸</text>
+<text x="72" y="302" fill="#7f8c8d" font-size="14" font-weight="700">Day 6返程</text>
+</svg>
+</div>
+<p class="map-note">示意图不按真实比例绘制，只表达6天住宿和游玩动线：市南两晚 → 石老人两晚 → 金沙滩一晚 → 返程。</p>
 
 <div class="day-header"><h3>Day 1：抵达 + 栈桥赶海初体验</h3></div>
 <p><span class="badge">住</span> 市南区·鲁迅公园附近</p>
@@ -610,6 +652,45 @@
 <section id="small-schedule" class="section-card">
 <h2>三、行程安排</h2>
 <p><strong>原则</strong>：每天只安排一个强项目，给老人和二宝留午睡/撤退时间。</p>
+
+<h3>6天动线地图</h3>
+<div class="route-map">
+<svg viewBox="0 0 860 440" role="img" aria-labelledby="route-title-small">
+<title id="route-title-small">6天青岛小家庭旅行动线地图</title>
+<defs>
+<marker id="route-arrow-small" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+<path d="M0,0 L0,6 L9,3 z" fill="#1a5276"></path>
+</marker>
+</defs>
+<rect width="860" height="440" fill="#f5fbff"></rect>
+<path d="M470 0 C540 70 515 140 610 205 C705 270 760 340 860 440 L860 0 Z" fill="#dff4ff"></path>
+<path d="M0 0 H520 C440 90 420 150 465 215 C520 295 420 375 300 440 H0 Z" fill="#eef8ef"></path>
+<path d="M140 92 L205 238 C330 182 455 170 570 214 C500 285 385 335 250 350" fill="none" stroke="#1a5276" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#route-arrow-small)"></path>
+<path d="M250 350 C190 285 110 210 140 92" fill="none" stroke="#7f8c8d" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#route-arrow-small)"></path>
+<circle cx="140" cy="92" r="13" fill="#34495e"></circle>
+<circle cx="205" cy="238" r="15" fill="#2e86c1"></circle>
+<circle cx="570" cy="214" r="15" fill="#27ae60"></circle>
+<circle cx="250" cy="350" r="15" fill="#f39c12"></circle>
+<rect x="40" y="42" width="230" height="62" rx="8" fill="white" stroke="#cfe0ef"></rect>
+<text x="58" y="68" fill="#1a5276" font-size="18" font-weight="700">青岛北站</text>
+<text x="58" y="91" fill="#52616f" font-size="14">Day 1到达 / Day 6返程</text>
+<rect x="188" y="178" width="250" height="80" rx="8" fill="white" stroke="#cfe0ef"></rect>
+<text x="206" y="204" fill="#1a5276" font-size="18" font-weight="700">市南老城海边</text>
+<text x="206" y="228" fill="#52616f" font-size="14">Day 1-2：鲁迅公园、栈桥</text>
+<text x="206" y="248" fill="#52616f" font-size="14">第二浴场、八大关、海底世界备选</text>
+<rect x="575" y="154" width="245" height="78" rx="8" fill="white" stroke="#cfe0ef"></rect>
+<text x="593" y="180" fill="#1a5276" font-size="18" font-weight="700">崂山石老人海边</text>
+<text x="593" y="204" fill="#52616f" font-size="14">Day 3-4：极地海洋世界</text>
+<text x="593" y="224" fill="#52616f" font-size="14">石老人沙滩、小麦岛</text>
+<rect x="268" y="338" width="255" height="68" rx="8" fill="white" stroke="#cfe0ef"></rect>
+<text x="286" y="364" fill="#1a5276" font-size="18" font-weight="700">黄岛金沙滩</text>
+<text x="286" y="388" fill="#52616f" font-size="14">Day 5-6：整天玩沙、日落、返程</text>
+<text x="330" y="116" fill="#1a5276" font-size="14" font-weight="700">Day 3换住</text>
+<text x="430" y="315" fill="#1a5276" font-size="14" font-weight="700">Day 5跨海到西海岸</text>
+<text x="72" y="302" fill="#7f8c8d" font-size="14" font-weight="700">Day 6返程</text>
+</svg>
+</div>
+<p class="map-note">示意图不按真实比例绘制，只表达6天住宿和游玩动线：市南两晚 → 石老人两晚 → 金沙滩一晚 → 返程。</p>
 
 <div class="day-header"><h3>Day 1：抵达青岛 + 栈桥/鲁迅公园初见海</h3></div>
 <p><span class="badge">住</span> 市南区</p>
