@@ -40,6 +40,210 @@
         .route-map svg { display: block; width: 100%; height: auto; }
         .map-note { color: #52616f; font-size: 0.9em; margin-top: -6px; }
         @media (max-width: 768px) { .container { padding: 10px; } table { font-size: 0.8em; } th, td { padding: 5px 8px; } }
+    /* === SEABREEZE-THEME-PATCH START === */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Serif+SC:wght@400;600&display=swap');
+
+html[data-theme="seabreeze"] {
+  --sb-paper:#f4ede0; --sb-ink:#1c2733; --sb-ink-soft:#46546a; --sb-ink-mute:#6b7888;
+  --sb-line:rgba(28,39,51,0.18); --sb-terra:#b25132; --sb-sea:#1f4d68; --sb-sand:#c89a4a;
+  --sb-display:"DM Serif Display","Songti SC","Source Han Serif SC","Noto Serif SC",Georgia,serif;
+  --sb-serif:"Songti SC","Source Han Serif SC","Noto Serif SC",Georgia,serif;
+  --sb-sans:"PingFang SC","Helvetica Neue",-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+html[data-theme="seabreeze"] body {
+  font-family: var(--sb-sans);
+  color: var(--sb-ink);
+  background: var(--sb-paper);
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(178,81,50,0.06) 0, transparent 38%),
+    radial-gradient(circle at 86% 82%, rgba(31,77,104,0.08) 0, transparent 42%);
+}
+
+html[data-theme="seabreeze"] .nav {
+  background: rgba(244, 237, 224, 0.92);
+  border-bottom: 1px solid var(--sb-line);
+  backdrop-filter: blur(8px);
+  padding: 12px 20px;
+}
+html[data-theme="seabreeze"] .nav a {
+  color: var(--sb-ink);
+  font-family: var(--sb-display);
+  font-style: italic;
+  font-size: 0.86rem;
+  letter-spacing: 0.06em;
+  opacity: 1;
+  margin-right: 22px;
+}
+html[data-theme="seabreeze"] .nav a:hover { color: var(--sb-terra); text-decoration: none; }
+
+html[data-theme="seabreeze"] .container { max-width: 760px; }
+
+html[data-theme="seabreeze"] h1 {
+  font-family: var(--sb-display);
+  font-weight: 400;
+  color: var(--sb-ink);
+  font-size: clamp(2.1rem, 4.5vw, 2.8rem);
+  letter-spacing: -0.01em;
+  margin-top: 50px;
+}
+html[data-theme="seabreeze"] .subtitle {
+  font-family: var(--sb-serif);
+  font-style: italic;
+  color: var(--sb-ink-soft);
+  border-bottom: 1px solid var(--sb-line);
+  padding-bottom: 22px;
+  margin-bottom: 36px;
+}
+
+html[data-theme="seabreeze"] section.section-card {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  border-top: 1px solid var(--sb-line);
+  padding: 28px 0 24px;
+  margin: 8px 0;
+}
+html[data-theme="seabreeze"] section.section-card:first-of-type { border-top: none; }
+
+html[data-theme="seabreeze"] h2 {
+  font-family: var(--sb-display);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--sb-ink);
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 28px 0 22px;
+  font-size: 1.85rem;
+  letter-spacing: -0.005em;
+}
+html[data-theme="seabreeze"] h3 {
+  font-family: var(--sb-display);
+  font-weight: 400;
+  color: var(--sb-sea);
+  font-size: 1.3rem;
+  margin: 22px 0 12px;
+}
+html[data-theme="seabreeze"] h4 {
+  font-family: var(--sb-sans);
+  font-weight: 600;
+  color: var(--sb-terra);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  margin: 18px 0 8px;
+}
+
+html[data-theme="seabreeze"] strong { color: var(--sb-ink); }
+html[data-theme="seabreeze"] a { color: var(--sb-sea); border-bottom: 1px solid rgba(31,77,104,0.3); text-decoration: none; }
+html[data-theme="seabreeze"] a:hover { color: var(--sb-terra); border-bottom-color: var(--sb-terra); }
+html[data-theme="seabreeze"] em { color: var(--sb-terra); font-style: italic; }
+
+html[data-theme="seabreeze"] table {
+  border-top: 2px solid var(--sb-ink);
+  border-bottom: 1px solid var(--sb-ink);
+  font-size: 0.92rem;
+}
+html[data-theme="seabreeze"] th, html[data-theme="seabreeze"] td {
+  border: none;
+  border-bottom: 1px solid var(--sb-line);
+  padding: 11px 14px;
+}
+html[data-theme="seabreeze"] th {
+  background: transparent;
+  color: var(--sb-ink-mute);
+  font-family: var(--sb-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.74rem;
+  border-bottom: 1px solid var(--sb-ink);
+}
+html[data-theme="seabreeze"] tr:nth-child(even) { background: rgba(255,255,255,0.32); }
+
+html[data-theme="seabreeze"] .highlight,
+html[data-theme="seabreeze"] .tip,
+html[data-theme="seabreeze"] .warning,
+html[data-theme="seabreeze"] .info {
+  background: transparent;
+  border-radius: 0;
+  border-left-width: 2px;
+  padding: 12px 16px;
+  font-family: var(--sb-serif);
+}
+html[data-theme="seabreeze"] .highlight { border-left-color: var(--sb-sand); color: #6c4a09; }
+html[data-theme="seabreeze"] .tip { border-left-color: #4a7c59; color: #2d4a36; }
+html[data-theme="seabreeze"] .warning { border-left-color: var(--sb-terra); color: #6b2010; }
+html[data-theme="seabreeze"] .info { border-left-color: var(--sb-sea); color: #1a3548; }
+
+html[data-theme="seabreeze"] .day-header {
+  background: var(--sb-ink);
+  color: var(--sb-paper);
+  border-radius: 0;
+  border-left: 4px solid var(--sb-sand);
+  padding: 14px 22px;
+  position: relative;
+}
+html[data-theme="seabreeze"] .day-header h3 {
+  color: var(--sb-paper);
+  font-family: var(--sb-display);
+  font-style: italic;
+}
+
+html[data-theme="seabreeze"] .badge {
+  background: transparent;
+  color: var(--sb-sea);
+  border: 1px solid var(--sb-sea);
+  border-radius: 0;
+  font-family: var(--sb-display);
+  font-style: italic;
+  font-size: 0.78rem;
+  padding: 2px 8px;
+}
+html[data-theme="seabreeze"] .badge-orange { color: var(--sb-terra); border-color: var(--sb-terra); background: transparent; }
+
+html[data-theme="seabreeze"] .price {
+  font-family: var(--sb-display);
+  font-style: italic;
+  color: var(--sb-terra);
+  font-weight: 400;
+}
+
+html[data-theme="seabreeze"] .checklist li::before { content: "☐  "; color: var(--sb-terra); }
+
+html[data-theme="seabreeze"] .route-map {
+  background: rgba(255,255,255,0.4);
+  border: 1px solid var(--sb-line);
+  border-radius: 0;
+}
+html[data-theme="seabreeze"] .map-note { color: var(--sb-ink-mute); font-family: var(--sb-serif); font-style: italic; }
+
+/* Toggle button (shared) */
+.theme-toggle {
+  position: fixed; bottom: 22px; right: 22px; z-index: 90;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 14px;
+  background: #1a5276; color: white;
+  border: none; border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  font-size: 0.82rem; letter-spacing: 0.04em;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background 0.2s, transform 0.2s;
+}
+.theme-toggle:hover { background: #2980b9; transform: translateY(-1px); }
+.theme-toggle .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #fd7e14; }
+html[data-theme="seabreeze"] .theme-toggle {
+  background: var(--sb-ink); color: var(--sb-paper);
+  font-family: var(--sb-display); font-style: italic; letter-spacing: 0.06em;
+}
+html[data-theme="seabreeze"] .theme-toggle:hover { background: var(--sb-terra); }
+html[data-theme="seabreeze"] .theme-toggle .dot { background: var(--sb-sand); }
+
+@media (max-width: 720px) {
+  .theme-toggle { bottom: 14px; right: 14px; padding: 8px 12px; font-size: 0.76rem; }
+}
+/* === SEABREEZE-THEME-PATCH END === */
     </style>
 </head>
 <body>
@@ -399,5 +603,36 @@
 </p>
 
 </div>
+<!-- SEABREEZE-TOGGLE START -->
+<button class="theme-toggle" type="button" id="theme-toggle" aria-label="切换风格">
+  <span class="dot"></span><span class="theme-label">切换 → 海风信简</span>
+</button>
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('qd-theme');
+    if (saved === 'seabreeze') document.documentElement.setAttribute('data-theme', 'seabreeze');
+  } catch (e) {}
+  var btn = document.getElementById('theme-toggle');
+  var label = btn.querySelector('.theme-label');
+  function syncLabel() {
+    var t = document.documentElement.getAttribute('data-theme');
+    label.textContent = t === 'seabreeze' ? '切换 → 经典蓝白' : '切换 → 海风信简';
+  }
+  syncLabel();
+  btn.addEventListener('click', function () {
+    var cur = document.documentElement.getAttribute('data-theme');
+    if (cur === 'seabreeze') {
+      document.documentElement.removeAttribute('data-theme');
+      try { localStorage.removeItem('qd-theme'); } catch (e) {}
+    } else {
+      document.documentElement.setAttribute('data-theme', 'seabreeze');
+      try { localStorage.setItem('qd-theme', 'seabreeze'); } catch (e) {}
+    }
+    syncLabel();
+  });
+})();
+</script>
+<!-- SEABREEZE-TOGGLE END -->
 </body>
 </html>

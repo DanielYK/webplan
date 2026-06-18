@@ -1,64 +1,227 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>青岛暑假攻略入口</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            min-height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: #1d2b36;
-            background: #f4f9fc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-        }
-        main {
-            width: min(760px, 100%);
-            background: #fff;
-            border: 1px solid #d8e7f5;
-            border-radius: 8px;
-            padding: 28px;
-            box-shadow: 0 8px 28px rgba(26, 82, 118, 0.08);
-        }
-        h1 { color: #1a5276; font-size: 1.8rem; margin-bottom: 8px; }
-        p { color: #52616f; line-height: 1.7; margin-bottom: 20px; }
-        .links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-        a {
-            display: block;
-            padding: 18px;
-            border: 1px solid #cfe0ef;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #1a5276;
-            background: #f8fcff;
-        }
-        a strong { display: block; font-size: 1.1rem; margin-bottom: 6px; }
-        a span { color: #52616f; font-size: 0.92rem; }
-        a:hover { border-color: #1a5276; background: #eef7ff; }
-        @media (max-width: 640px) {
-            main { padding: 20px; }
-            .links { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>青岛暑假攻略 · 海风信简</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4ede0;
+  --ink: #1c2733;
+  --ink-soft: #46546a;
+  --ink-mute: #6b7888;
+  --line: rgba(28, 39, 51, 0.18);
+  --terra: #b25132;
+  --sea: #1f4d68;
+  --sand: #c89a4a;
+  --display: "DM Serif Display", "Songti SC", "Source Han Serif SC", "Noto Serif SC", Georgia, serif;
+  --serif: "Songti SC", "Source Han Serif SC", "Noto Serif SC", Georgia, serif;
+  --sans: "PingFang SC", "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(178, 81, 50, 0.06) 0, transparent 38%),
+    radial-gradient(circle at 86% 82%, rgba(31, 77, 104, 0.08) 0, transparent 42%);
+  color: var(--ink);
+  line-height: 1.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  -webkit-font-smoothing: antialiased;
+}
+main {
+  width: min(820px, 100%);
+}
+header {
+  text-align: center;
+  padding-bottom: 36px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+header::before, header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  width: 28px;
+  height: 28px;
+  border-bottom: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  background: var(--paper);
+}
+header::before { left: 0; }
+header::after { right: 0; transform: scaleX(-1); }
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 14px;
+}
+.eyebrow::before, .eyebrow::after {
+  content: "—";
+  margin: 0 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0;
+}
+h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 5vw, 3rem);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+h1 em {
+  font-style: italic;
+  color: var(--terra);
+}
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+.collection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+.card {
+  display: block;
+  padding: 24px 26px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  position: relative;
+}
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--terra);
+  background: rgba(255, 255, 255, 0.78);
+}
+.card .cnum {
+  font-family: var(--display);
+  font-style: italic;
+  color: var(--terra);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.card h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.card h2 em {
+  font-style: italic;
+  color: var(--sea);
+}
+.card .desc {
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.card .tag {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.card.is-sleeper {
+  background: linear-gradient(180deg, rgba(31, 77, 104, 0.06) 0%, rgba(255, 255, 255, 0.55) 60%);
+}
+.card.is-sleeper .tag { color: var(--terra); }
+
+footer {
+  margin-top: 40px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-mute);
+  font-size: 0.82rem;
+}
+.stamp {
+  display: inline-block;
+  border: 1px solid var(--terra);
+  color: var(--terra);
+  padding: 5px 12px;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+@media (max-width: 640px) {
+  body { padding: 28px 16px; }
+  .collection { grid-template-columns: 1fr; }
+  .card .tag { position: static; display: block; margin-bottom: 8px; }
+}
+</style>
 </head>
 <body>
 <main>
-    <h1>青岛暑假攻略</h1>
-    <p>攻略已拆成两个独立版本，按实际出行人数打开对应页面。</p>
-    <div class="links">
-        <a href="qingdao-9.html">
-            <strong>9人家庭版</strong>
-            <span>你、老婆、两宝、奶奶、外婆、三个妹妹们</span>
-        </a>
-        <a href="qingdao-5.html">
-            <strong>5人小家庭版</strong>
-            <span>你、老婆、大宝、二宝、奶奶</span>
-        </a>
-    </div>
+  <header>
+    <div class="eyebrow">Qingdao · Summer · 攻略合集</div>
+    <h1>海风<em>信简</em>·青岛六日</h1>
+    <p class="lede">四个版本，按出行人数与去程方式各取所需。</p>
+  </header>
+
+  <div class="collection">
+    <a class="card" href="qingdao-9.html">
+      <span class="tag">9人 · 高铁</span>
+      <div class="cnum">I.</div>
+      <h2>九人大家庭<em>·</em>高铁版</h2>
+      <p class="desc">三代九人，正向行程，去回都白天高铁。</p>
+    </a>
+
+    <a class="card" href="qingdao-5.html">
+      <span class="tag">5人 · 高铁</span>
+      <div class="cnum">II.</div>
+      <h2>五人小家庭<em>·</em>高铁版</h2>
+      <p class="desc">原班人马，正向行程，最稳的默认方案。</p>
+    </a>
+
+    <a class="card is-sleeper" href="qingdao-9-sleeper.html">
+      <span class="tag">9人 · 卧铺</span>
+      <div class="cnum">III.</div>
+      <h2>九人组<em>·</em>卧铺金沙滩优先</h2>
+      <p class="desc">软卧两包厢，Day 1 直奔金沙滩，反向行程。</p>
+    </a>
+
+    <a class="card is-sleeper" href="qingdao-5-sleeper.html">
+      <span class="tag">5人 · 卧铺</span>
+      <div class="cnum">IV.</div>
+      <h2>五人版<em>·</em>卧铺金沙滩优先</h2>
+      <p class="desc">软卧一包厢，凌晨到岸，金沙滩玩满 1.5 天。</p>
+    </a>
+  </div>
+
+  <footer>
+    <div class="stamp">海风信简</div>
+    <div>价格、票务以实际下单为准 · 暑假旺季波动较大</div>
+  </footer>
 </main>
 </body>
 </html>
