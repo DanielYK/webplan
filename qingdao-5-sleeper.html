@@ -823,6 +823,23 @@ html[data-theme="classic"] .theme-toggle {
 html[data-theme="classic"] .theme-toggle:hover { background: #2980b9; }
 html[data-theme="classic"] .theme-toggle .dot { background: #fd7e14; }
 </style>
+<style>
+.route-visuals { margin: 24px 0; }
+.route-visuals > * + * { margin-top: 32px; }
+.route-visuals .route-caption {
+  font-family: var(--sans, sans-serif);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--terra, #b25132);
+  margin-bottom: 8px;
+}
+.mermaid { background: rgba(255,255,255,0.55); border: 1px solid var(--line, rgba(0,0,0,0.12)); border-radius: 8px; padding: 16px; overflow-x: auto; }
+html[data-theme="classic"] .mermaid { background: #f8fcff; border-color: #d8e7f5; }
+.route-svg { width: 100%; max-width: 620px; height: auto; display: block; margin: 0 auto; background: rgba(255,255,255,0.55); border: 1px solid var(--line, rgba(0,0,0,0.12)); border-radius: 8px; padding: 12px; }
+html[data-theme="classic"] .route-svg { background: #f8fcff; border-color: #d8e7f5; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script>
 (function() {
   try {
@@ -830,6 +847,11 @@ html[data-theme="classic"] .theme-toggle .dot { background: #fd7e14; }
     if (saved === 'classic') document.documentElement.setAttribute('data-theme', 'classic');
   } catch (e) {}
 })();
+window.addEventListener('DOMContentLoaded', function() {
+  if (window.mermaid) {
+    window.mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { htmlLabels: true, curve: 'basis' } });
+  }
+});
 </script>
 </head>
 <body>
