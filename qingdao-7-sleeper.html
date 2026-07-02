@@ -844,8 +844,11 @@ html[data-theme="classic"] .route-svg { background: #f8fcff; border-color: #d8e7
 (function() {
   try {
     var saved = localStorage.getItem('qd-theme');
-    if (saved === 'classic') document.documentElement.setAttribute('data-theme', 'classic');
-  } catch (e) {}
+    // 默认经典蓝白：无偏好或明确 classic 时都用 classic
+    if (saved !== 'seabreeze') document.documentElement.setAttribute('data-theme', 'classic');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'classic');
+  }
 })();
 window.addEventListener('DOMContentLoaded', function() {
   if (window.mermaid) {
@@ -2969,7 +2972,7 @@ graph LR
 
 </main>
 <button class="theme-toggle" type="button" aria-label="切换风格" id="theme-toggle">
-  <span class="dot"></span><span class="theme-label">海风信简</span>
+  <span class="dot"></span><span class="theme-label">切换 → 海风信简</span>
 </button>
 <script>
 (function() {
@@ -2983,8 +2986,9 @@ graph LR
   btn.addEventListener('click', function() {
     var cur = document.documentElement.getAttribute('data-theme');
     if (cur === 'classic') {
+      // 切到海风信简：显式记住偏好
       document.documentElement.removeAttribute('data-theme');
-      try { localStorage.removeItem('qd-theme'); } catch (e) {}
+      try { localStorage.setItem('qd-theme', 'seabreeze'); } catch (e) {}
     } else {
       document.documentElement.setAttribute('data-theme', 'classic');
       try { localStorage.setItem('qd-theme', 'classic'); } catch (e) {}
