@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小学生必读书目 · 童年信笺</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4ede0;
+  --ink: #1c2733;
+  --ink-soft: #46546a;
+  --ink-mute: #6b7888;
+  --line: rgba(28, 39, 51, 0.18);
+  --terra: #b25132;
+  --sea: #1f4d68;
+  --sand: #c89a4a;
+  --leaf: #4a7a4f;
+  --display: "DM Serif Display", "Songti SC", "Source Han Serif SC", "Noto Serif SC", Georgia, serif;
+  --serif: "Songti SC", "Source Han Serif SC", "Noto Serif SC", Georgia, serif;
+  --sans: "PingFang SC", "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(178, 81, 50, 0.06) 0, transparent 38%),
+    radial-gradient(circle at 86% 82%, rgba(74, 122, 79, 0.08) 0, transparent 42%);
+  color: var(--ink);
+  line-height: 1.75;
+  padding: 40px 24px 60px;
+  -webkit-font-smoothing: antialiased;
+}
+main { width: min(820px, 100%); margin: 0 auto; }
+
+header {
+  text-align: center;
+  padding-bottom: 36px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+header::before, header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  width: 28px;
+  height: 28px;
+  border-bottom: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  background: var(--paper);
+}
+header::before { left: 0; }
+header::after { right: 0; transform: scaleX(-1); }
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 14px;
+}
+.eyebrow::before, .eyebrow::after {
+  content: "—";
+  margin: 0 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0;
+}
+h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 5vw, 3rem);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+h1 em { font-style: italic; color: var(--terra); }
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+.preface {
+  font-family: var(--serif);
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+  line-height: 1.85;
+  padding: 22px 26px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.42);
+  margin-bottom: 40px;
+}
+.preface p + p { margin-top: 10px; }
+.preface strong { color: var(--sea); font-weight: 600; }
+
+nav.subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  justify-content: center;
+  margin-bottom: 46px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+nav.subjects a {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+nav.subjects a:hover { color: var(--terra); }
+
+section.subject { margin-bottom: 56px; }
+section.subject > .heading {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+section.subject .cnum {
+  font-family: var(--display);
+  font-style: italic;
+  color: var(--terra);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+}
+section.subject h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.4vw, 1.9rem);
+  letter-spacing: -0.005em;
+}
+section.subject h2 em { font-style: italic; color: var(--sea); }
+
+.grade { margin-bottom: 30px; }
+.grade h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.08rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+.grade .grade-note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.86rem;
+  color: var(--ink-mute);
+  margin-bottom: 14px;
+}
+
+.block { margin: 14px 0 6px; }
+.block-title {
+  display: inline-block;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  border: 1px solid var(--line);
+  margin-bottom: 12px;
+  color: var(--ink-soft);
+}
+.block.classics .block-title { color: var(--terra); border-color: rgba(178, 81, 50, 0.35); }
+.block.recent .block-title { color: var(--leaf); border-color: rgba(74, 122, 79, 0.35); }
+
+ul.books { list-style: none; padding: 0; }
+ul.books li {
+  padding: 8px 0 8px 22px;
+  position: relative;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  border-bottom: 1px dotted var(--line);
+}
+ul.books li:last-child { border-bottom: none; }
+ul.books li::before {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+.block.classics ul.books li::before { content: "✦"; color: var(--terra); }
+.block.recent   ul.books li::before { content: "✧"; color: var(--leaf); }
+
+.book-title { color: var(--ink); font-weight: 500; }
+.book-author {
+  color: var(--ink-mute);
+  font-size: 0.88rem;
+  font-family: var(--serif);
+  font-style: italic;
+  margin-left: 6px;
+}
+
+.suggestions {
+  margin-top: 60px;
+  padding: 30px 32px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.5);
+}
+.suggestions h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.55rem;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.suggestions h2 em { font-style: italic; color: var(--terra); }
+.suggestions h3 {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--sea);
+  margin: 22px 0 10px;
+  letter-spacing: 0.02em;
+}
+.suggestions h3:first-of-type { margin-top: 0; }
+.suggestions ul { list-style: none; padding-left: 0; }
+.suggestions ul li {
+  padding: 5px 0 5px 20px;
+  position: relative;
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+}
+.suggestions ul li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--terra);
+  font-size: 0.85rem;
+  top: 7px;
+}
+.suggestions strong { color: var(--ink); font-weight: 600; }
+
+footer {
+  margin-top: 50px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-mute);
+  font-size: 0.82rem;
+  line-height: 1.9;
+}
+.stamp {
+  display: inline-block;
+  border: 1px solid var(--terra);
+  color: var(--terra);
+  padding: 5px 12px;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--display);
+  font-style: italic;
+  color: var(--sea);
+  text-decoration: none;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+}
+.back-link:hover { color: var(--terra); }
+
+@media (max-width: 640px) {
+  body { padding: 28px 16px 40px; }
+  .preface { padding: 18px 20px; }
+  section.subject > .heading { flex-direction: column; gap: 4px; align-items: flex-start; }
+  .suggestions { padding: 22px 20px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Reading · 小学阶段 · 分级书单</div>
+    <h1>童年<em>信笺</em>·必读书目</h1>
+    <p class="lede">经典与近作并列，按学科与年级择取所需。</p>
+  </header>
+
+  <div class="preface">
+    <p><strong>参考来源</strong>：教育部《中小学生阅读指导目录（2020 年版）》为经典基准，目前仍为最新官方版本；辅以亲近母语 2026 版分级阅读书目、深圳读书月年度童书、国家新闻出版署"向青少年推荐百种优秀出版物"等近年榜单。</p>
+    <p><strong>编排</strong>：每个学科先按年级列"经典书目"，再列 2019 年后出版的"近年佳作"，既保住必读根基，也纳入时代新声。</p>
+  </div>
+
+  <nav class="subjects">
+    <a href="#literature">I. 文学</a>
+    <a href="#history">II. 历史</a>
+    <a href="#science">III. 科普</a>
+    <a href="#math">IV. 数学</a>
+    <a href="#tips">使用建议</a>
+  </nav>
+
+  <section class="subject" id="literature">
+    <div class="heading">
+      <span class="cnum">I.</span>
+      <h2>文学<em>·</em>Literature</h2>
+    </div>
+
+    <div class="grade">
+      <h3>低年级</h3>
+      <p class="grade-note">1–2 年级 · 童话、绘本、图文启蒙</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《小巴掌童话》</span><span class="book-author">张秋生</span></li>
+          <li><span class="book-title">《金波四季童话》</span><span class="book-author">金波</span></li>
+          <li><span class="book-title">《没头脑和不高兴》</span><span class="book-author">任溶溶</span></li>
+          <li><span class="book-title">《小猪唏哩呼噜》</span><span class="book-author">孙幼军</span></li>
+          <li><span class="book-title">《神笔马良》</span><span class="book-author">洪汛涛</span></li>
+          <li><span class="book-title">《小鲤鱼跳龙门》</span><span class="book-author">金近</span></li>
+          <li><span class="book-title">《孤独的小螃蟹》</span><span class="book-author">冰波</span></li>
+          <li><span class="book-title">《猜猜我有多爱你》</span><span class="book-author">[爱尔兰] 山姆·麦克布雷尼</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《一园青菜成了精》</span><span class="book-author">熊亮</span></li>
+          <li><span class="book-title">《团圆》</span><span class="book-author">文:余丽琼;图:朱成梁·丰子恺儿童图画书奖</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>中年级</h3>
+      <p class="grade-note">3–4 年级 · 桥梁书、经典童话、儿童文学</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《安徒生童话》</span><span class="book-author">[丹麦] 安徒生</span></li>
+          <li><span class="book-title">《格林童话》</span><span class="book-author">[德] 格林兄弟</span></li>
+          <li><span class="book-title">《稻草人》</span><span class="book-author">叶圣陶</span></li>
+          <li><span class="book-title">《夏洛的网》</span><span class="book-author">[美] E.B. 怀特</span></li>
+          <li><span class="book-title">《西游记》（青少年版）</span><span class="book-author">吴承恩</span></li>
+          <li><span class="book-title">《铁丝网上的小花》</span><span class="book-author">文:[瑞士] 加莱兹;图:[意] 因诺森提</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《云朵一样的八哥》</span><span class="book-author">汤汤·幻想童话</span></li>
+          <li><span class="book-title">《穿堂风》</span><span class="book-author">曹文轩</span></li>
+          <li><span class="book-title">《驯鹿六季》</span><span class="book-author">格日勒其木格·黑鹤·自然文学</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>高年级</h3>
+      <p class="grade-note">5–6 年级 · 长篇原著与深度阅读</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《城南旧事》</span><span class="book-author">林海音</span></li>
+          <li><span class="book-title">《三国演义》（青少年版）</span><span class="book-author">罗贯中</span></li>
+          <li><span class="book-title">《水浒传》（青少年版）</span><span class="book-author">施耐庵</span></li>
+          <li><span class="book-title">《哈利·波特与魔法石》</span><span class="book-author">[英] J.K. 罗琳</span></li>
+          <li><span class="book-title">《纳尼亚传奇:狮子、女巫与魔衣柜》</span><span class="book-author">[英] C.S. 刘易斯</span></li>
+          <li><span class="book-title">《冰心儿童文学全集》</span><span class="book-author">冰心·含《寄小读者》《小橘灯》</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《西湖民间故事》（新版插画本）</span></li>
+          <li><span class="book-title">《寻找鱼王》</span><span class="book-author">张炜·茅奖得主儿童文学</span></li>
+          <li><span class="book-title">《大山里的小诗人》</span><span class="book-author">是光诗歌 编</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="subject" id="history">
+    <div class="heading">
+      <span class="cnum">II.</span>
+      <h2>历史<em>·</em>History</h2>
+    </div>
+
+    <div class="grade">
+      <h3>低年级</h3>
+      <p class="grade-note">1–2 年级 · 历史启蒙/绘本</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《幼儿趣味中国历史绘本》</span></li>
+          <li><span class="book-title">《时间里的中国》</span></li>
+          <li><span class="book-title">《儿童历史百科绘本》</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《敦煌:中国历史地理绘本》</span><span class="book-author">苏小芮</span></li>
+          <li><span class="book-title">《手绘中国地理地图》《手绘世界地理地图》</span><span class="book-author">洋洋兔</span></li>
+          <li><span class="book-title">《漫画中华上下五千年》</span><span class="book-author">洋洋兔</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>中年级</h3>
+      <p class="grade-note">3–4 年级 · 历史入门与普及</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《写给儿童的中国历史》（全 14 册）</span><span class="book-author">陈卫平</span></li>
+          <li><span class="book-title">《林汉达中国历史故事集》</span><span class="book-author">林汉达</span></li>
+          <li><span class="book-title">《太喜欢历史了！》</span><span class="book-author">知中编委会</span></li>
+          <li><span class="book-title">《如果历史是一群喵》</span><span class="book-author">肥志·漫画普及</span></li>
+          <li><span class="book-title">《甲骨文学校》</span><span class="book-author">黄加佳·历史题材儿童小说</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《这里是中国》（少年版）</span><span class="book-author">星球研究所</span></li>
+          <li><span class="book-title">《穿越时空的中国》</span><span class="book-author">北京海冰文化·立体书</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>高年级</h3>
+      <p class="grade-note">5–6 年级 · 通史与深读</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《上下五千年》</span><span class="book-author">林汉达、曹余章</span></li>
+          <li><span class="book-title">《少年读史记》</span><span class="book-author">张嘉骅 编著</span></li>
+          <li><span class="book-title">《希利尔讲世界史》</span><span class="book-author">[美] 希利尔</span></li>
+          <li><span class="book-title">《全球通史·少年版》</span><span class="book-author">[美] 斯塔夫里阿诺斯 原著</span></li>
+          <li><span class="book-title">《明朝那些事儿》（青少年版）</span><span class="book-author">当年明月</span></li>
+          <li><span class="book-title">《孩子读得懂的资治通鉴》</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《故宫里的博物学》（全 3 册）</span><span class="book-author">故宫博物院 出品</span></li>
+          <li><span class="book-title">《汴京:城市与人》系列</span><span class="book-author">宋代城市生活主题</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>跨年级通识</h3>
+      <div class="block classics">
+        <span class="block-title">推荐补充</span>
+        <ul class="books">
+          <li><span class="book-title">《藏在地图里的中国历史》</span></li>
+          <li><span class="book-title">《博物馆里的中国通史》</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="subject" id="science">
+    <div class="heading">
+      <span class="cnum">III.</span>
+      <h2>科普<em>·</em>Science</h2>
+    </div>
+
+    <div class="grade">
+      <h3>低年级</h3>
+      <p class="grade-note">1–3 年级 · 图文启蒙、翻翻书</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《神奇校车》系列</span><span class="book-author">[美] 乔安娜·柯尔</span></li>
+          <li><span class="book-title">《第一次发现丛书》</span><span class="book-author">[法] 伽利玛少儿出版社·透视眼+手电筒系列</span></li>
+          <li><span class="book-title">《一粒种子的旅行》</span><span class="book-author">[德] 安妮·默勒</span></li>
+          <li><span class="book-title">《揭秘系列》翻翻书</span><span class="book-author">[英] 尤斯伯恩出版公司</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《这就是二十四节气》</span><span class="book-author">高春香、邵敏</span></li>
+          <li><span class="book-title">《生命的旅程》</span><span class="book-author">上海自然博物馆</span></li>
+          <li><span class="book-title">《DK 儿童视觉大百科》系列新版</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>中年级</h3>
+      <p class="grade-note">4–5 年级 · 自然观察与百科</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《昆虫记》</span><span class="book-author">[法] 让-亨利·法布尔</span></li>
+          <li><span class="book-title">《蜡烛的化学史》</span><span class="book-author">[英] 迈克尔·法拉第</span></li>
+          <li><span class="book-title">《中国儿童百科全书》</span><span class="book-author">中国大百科全书出版社</span></li>
+          <li><span class="book-title">《十万个为什么》</span><span class="book-author">少年儿童出版社第六版</span></li>
+          <li><span class="book-title">《漫话国宝:走！去博物馆》</span><span class="book-author">张鹏</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《太空日记》</span><span class="book-author">景海鹏、陈冬、刘旺·中国航天员实录</span></li>
+          <li><span class="book-title">《病毒来了》</span><span class="book-author">王荣·后疫情主题科普</span></li>
+          <li><span class="book-title">《嗨！有趣的故事》系列</span><span class="book-author">中国科学家系列传记</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>高年级</h3>
+      <p class="grade-note">5–6 年级 · 博物与深度科普</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《寂静的春天》</span><span class="book-author">[美] 蕾切尔·卡森</span></li>
+          <li><span class="book-title">《DK 博物大百科》</span><span class="book-author">[英] DK 公司 编</span></li>
+          <li><span class="book-title">《万物运转的秘密》</span><span class="book-author">[美] 大卫·麦考利</span></li>
+          <li><span class="book-title">《不可思议的大国重器》</span></li>
+          <li><span class="book-title">《地球上的爆笑生活》</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《万物简史》（少年彩绘版）</span><span class="book-author">[美] 比尔·布莱森</span></li>
+          <li><span class="book-title">《大科学家讲的小故事》系列</span><span class="book-author">中科院院士科普</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>科学人物传记</h3>
+      <div class="block classics">
+        <span class="block-title">拓展阅读</span>
+        <ul class="books">
+          <li><span class="book-title">《征战超级稻——袁隆平爷爷带我去探索》</span></li>
+          <li><span class="book-title">《还原地动仪——地震学家带我去探索》</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="subject" id="math">
+    <div class="heading">
+      <span class="cnum">IV.</span>
+      <h2>数学<em>·</em>Mathematics</h2>
+    </div>
+
+    <div class="grade">
+      <h3>低年级</h3>
+      <p class="grade-note">1–2 年级 · 数学启蒙绘本</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《我家漂亮的尺子》</span><span class="book-author">韩国引进数学启蒙绘本</span></li>
+          <li><span class="book-title">《走进奇妙的数学世界》</span><span class="book-author">[日] 安野光雅</span></li>
+          <li><span class="book-title">《李毓佩数学童话集》（小学低年级）</span><span class="book-author">李毓佩</span></li>
+          <li><span class="book-title">《数学帮帮忙》</span><span class="book-author">[美] Kane Press 编·Math Matters 系列</span></li>
+          <li><span class="book-title">《从小爱数学》</span><span class="book-author">韩国日月文化系列·多人合著</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>中年级</h3>
+      <p class="grade-note">3–4 年级 · 数学童话与漫画</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《爱克斯探长》</span><span class="book-author">李毓佩</span></li>
+          <li><span class="book-title">《奇妙的数王国》</span><span class="book-author">李毓佩</span></li>
+          <li><span class="book-title">《马小跳玩数学》</span><span class="book-author">杨红樱</span></li>
+          <li><span class="book-title">《汉声数学图画书》</span><span class="book-author">[美] 多人合著·汉声杂志社 编译</span></li>
+          <li><span class="book-title">《我的第一本科学漫画书·实验王系列》</span><span class="book-author">[韩] Gomdori Co.</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《这就是数学》系列</span><span class="book-author">洋洋兔漫画数学</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grade">
+      <h3>高年级</h3>
+      <p class="grade-note">5–6 年级 · 趣味代数与思维训练</p>
+
+      <div class="block classics">
+        <span class="block-title">经典书目</span>
+        <ul class="books">
+          <li><span class="book-title">《趣味代数学》</span><span class="book-author">[苏] 雅科夫·别莱利曼</span></li>
+          <li><span class="book-title">《李毓佩数学历险记》</span><span class="book-author">李毓佩</span></li>
+          <li><span class="book-title">《数学花园漫游记》</span><span class="book-author">马希文</span></li>
+          <li><span class="book-title">《马先生谈算学》（又名《原来数学可以这样学》）</span><span class="book-author">刘薰宇</span></li>
+        </ul>
+      </div>
+
+      <div class="block recent">
+        <span class="block-title">近年佳作</span>
+        <ul class="books">
+          <li><span class="book-title">《数学也荒唐》</span><span class="book-author">[美] 西奥妮·帕斯·近年新版</span></li>
+          <li><span class="book-title">《小学数学思维 1000 题》</span><span class="book-author">思维训练向</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="suggestions" id="tips">
+    <h2>使用<em>建议</em></h2>
+
+    <h3>分年级阅读原则</h3>
+    <ul>
+      <li>低年级以绘本、童话、图文并茂的读物为主，重在激发兴趣</li>
+      <li>中年级逐步引入文字书和桥梁书，注重故事性和知识性平衡</li>
+      <li>高年级可接触有深度的经典原著和长篇作品，培养独立阅读能力</li>
+    </ul>
+
+    <h3>经典与近作的搭配</h3>
+    <ul>
+      <li><strong>经典书目</strong>:经过多年沉淀，语言、故事性、思想性都经受住时间考验，是必读基础</li>
+      <li><strong>近年佳作</strong>:内容更贴近当代儿童视角（敦煌、故宫、航天、二十四节气、生态议题等），语言表达也更符合现代阅读习惯</li>
+    </ul>
+
+    <h3>版本选择提醒</h3>
+    <ul>
+      <li>经典外国文学（如《夏洛的网》《哈利·波特》）优先选择公认权威译本</li>
+      <li>《十万个为什么》推荐少年儿童出版社第六版，市面同名书良莠不齐</li>
+      <li>中国古典四大名著建议选青少年版或注释版，避免直接读原著带来挫败感</li>
+      <li>韩国数学绘本系列的具体作者信息以书店实物封面为准</li>
+    </ul>
+
+    <h3>书目更新参考</h3>
+    <ul>
+      <li>教育部《中小学生阅读指导目录》若发布新版，将取代 2020 版作为首要参考</li>
+      <li>亲近母语"中国小学生分级阅读书目"每年更新</li>
+      <li>深圳读书月"年度十大童书"每年 11 月发布</li>
+      <li>国家新闻出版署"向全国青少年推荐百种优秀出版物"每年发布</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="stamp">童年信笺</div>
+    <div>教育部《中小学生阅读指导目录（2020 年版）》小学阶段共推荐 110 种，本文为综合精选。</div>
+    <div>家长可依孩子实际阅读能力灵活调整，不必强求全部读完。</div>
+    <a class="back-link" href="index.html">← 返回合集</a>
+  </footer>
+
+</main>
+</body>
+</html>
